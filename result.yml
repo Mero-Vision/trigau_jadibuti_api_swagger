@@ -18,10 +18,19 @@ info:
 servers:
   - url: https://api.trigaujadibuti.com/
     description: server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
 tags:
   - name: Customer
   - name: Admin
   - name: Admin > Authentication
+  - name: Admin > Category
+  - name: Admin > Inventory
+  - name: Admin > Inventory > Unit Measurement
+  - name: Admin > Products
 paths:
   /api/admin/login:
     post:
@@ -46,6 +55,410 @@ paths:
           schema:
             type: string
           example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/category:
+    post:
+      tags:
+        - Admin > Category
+      summary: store category
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Herbal
+                description:
+                  type: string
+                  example: Herbal
+                category_image:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Admin > Category
+      summary: show all category
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: pagination_limit
+          in: query
+          schema:
+            type: string
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/category/{id}:
+    post:
+      tags:
+        - Admin > Category
+      summary: update category
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                category_image:
+                  type: string
+                _method:
+                  type: string
+                  example: PUT
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Admin > Category
+      summary: delete category
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/unit_measurements:
+    post:
+      tags:
+        - Admin > Inventory > Unit Measurement
+      summary: store unit measurement
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Kilogram
+                symbol:
+                  type: string
+                  example: KG
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Admin > Inventory > Unit Measurement
+      summary: show all unit measurement
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: pagination_limit
+          in: query
+          schema:
+            type: string
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/unit_measurements/1:
+    post:
+      tags:
+        - Admin > Inventory > Unit Measurement
+      summary: update unit measurement
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Kilogram
+                symbol:
+                  type: string
+                  example: KG
+                _method:
+                  type: string
+                  example: PUT
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/unit_measurements/{id}:
+    delete:
+      tags:
+        - Admin > Inventory > Unit Measurement
+      summary: delete unit measurement
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/products:
+    post:
+      tags:
+        - Admin > Products
+      summary: store product
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: integer
+                  example: '1'
+                unit_measurement_id:
+                  type: integer
+                  example: '1'
+                name:
+                  type: string
+                  example: Ashwaganda
+                description:
+                  type: string
+                  example: Ashwaganda
+                selling_price:
+                  type: integer
+                  example: '500'
+                cost_price:
+                  type: integer
+                  example: '300'
+                sku:
+                  type: integer
+                  example: '54536546'
+                stock_quantity:
+                  type: integer
+                  example: '460'
+                low_stock_threshold:
+                  type: integer
+                  example: '50'
+                unit_value:
+                  type: integer
+                  example: '1'
+                vat:
+                  type: integer
+                  example: '13'
+                product_image:
+                  type: string
+                  format: binary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Admin > Products
+      summary: show all products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: pagination_limit
+          in: query
+          schema:
+            type: string
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/products/{id}:
+    post:
+      tags:
+        - Admin > Products
+      summary: update product
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: integer
+                  example: '1'
+                unit_measurement_id:
+                  type: integer
+                  example: '1'
+                name:
+                  type: string
+                  example: Ashwaganda
+                description:
+                  type: string
+                  example: Ashwaganda
+                selling_price:
+                  type: integer
+                  example: '500'
+                cost_price:
+                  type: integer
+                  example: '300'
+                sku:
+                  type: integer
+                  example: '54536546'
+                stock_quantity:
+                  type: integer
+                  example: '460'
+                low_stock_threshold:
+                  type: integer
+                  example: '50'
+                unit_value:
+                  type: integer
+                  example: '1'
+                vat:
+                  type: integer
+                  example: '13'
+                product_image:
+                  type: string
+                  format: binary
+                _method:
+                  type: string
+                  example: PUT
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Admin > Products
+      summary: delete product
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successful response
