@@ -8,8 +8,114 @@
 	},
 	"item": [
 		{
-			"name": "Customer",
-			"item": []
+			"name": "Website",
+			"item": [
+				{
+					"name": "Contact Us",
+					"item": [
+						{
+							"name": "store contact us",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "mobile_no",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "subject",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "message",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/contact-us",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"contact-us"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Faq",
+					"item": [
+						{
+							"name": "show all faqs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/faqs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"faqs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Site Settings",
+					"item": [
+						{
+							"name": "show site setting data",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/site-settings",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"site-settings"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		},
 		{
 			"name": "Admin",
@@ -907,6 +1013,274 @@
 										"api",
 										"admin",
 										"site-settings"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Contact Us",
+					"item": [
+						{
+							"name": "show all contact us",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/admin/contact-us",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"contact-us"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete contact us",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/admin/contact-us/{id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"contact-us",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Faq",
+					"item": [
+						{
+							"name": "store faq data",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "question",
+											"value": "hy",
+											"type": "text"
+										},
+										{
+											"key": "answer",
+											"value": "hy",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/admin/faqs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"faqs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update faq data",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "question",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "answer",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/admin/faqs/{id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"faqs",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show all faqs",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/admin/faqs?pagination_limit&search_keyword",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"faqs"
+									],
+									"query": [
+										{
+											"key": "pagination_limit",
+											"value": null
+										},
+										{
+											"key": "search_keyword",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete faq",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/admin/faqs/{id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"faqs",
+										"{id}"
 									]
 								}
 							},

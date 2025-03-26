@@ -24,7 +24,10 @@ components:
       type: http
       scheme: bearer
 tags:
-  - name: Customer
+  - name: Website
+  - name: Website > Contact Us
+  - name: Website > Faq
+  - name: Website > Site Settings
   - name: Admin
   - name: Admin > Authentication
   - name: Admin > Category
@@ -32,7 +35,61 @@ tags:
   - name: Admin > Inventory > Unit Measurement
   - name: Admin > Products
   - name: Admin > Site Settings
+  - name: Admin > Contact Us
+  - name: Admin > Faq
 paths:
+  /api/contact-us:
+    post:
+      tags:
+        - Website > Contact Us
+      summary: store contact us
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                mobile_no:
+                  type: string
+                subject:
+                  type: string
+                message:
+                  type: string
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/faqs:
+    get:
+      tags:
+        - Website > Faq
+      summary: show all faqs
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/site-settings:
+    get:
+      tags:
+        - Website > Site Settings
+      summary: show site setting data
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /api/admin/login:
     post:
       tags:
@@ -531,6 +588,160 @@ paths:
           schema:
             type: string
           example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/contact-us:
+    get:
+      tags:
+        - Admin > Contact Us
+      summary: show all contact us
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/contact-us/{id}:
+    delete:
+      tags:
+        - Admin > Contact Us
+      summary: delete contact us
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/faqs:
+    post:
+      tags:
+        - Admin > Faq
+      summary: store faq data
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  example: hy
+                answer:
+                  type: string
+                  example: hy
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Admin > Faq
+      summary: show all faqs
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: pagination_limit
+          in: query
+          schema:
+            type: string
+        - name: search_keyword
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/faqs/{id}:
+    post:
+      tags:
+        - Admin > Faq
+      summary: update faq data
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                answer:
+                  type: string
+                _method:
+                  type: string
+                  example: PUT
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Admin > Faq
+      summary: delete faq
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successful response
