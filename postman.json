@@ -763,6 +763,156 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Site Settings",
+					"item": [
+						{
+							"name": "store site settings",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "website_title",
+											"value": "Trigau Jadibuti – Authentic Herbal Solutions",
+											"type": "text"
+										},
+										{
+											"key": "website_subtitle",
+											"value": "Natural Remedies for a Healthier Life",
+											"type": "text"
+										},
+										{
+											"key": "logo",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "fav_icon",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "contact_no",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "home_page_banner",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "terms_conditions",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "facebook_link",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "instagram_link",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "tiktok_link",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "whatsapp_number",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "about_us",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/admin/site-settings",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"site-settings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show all site settings",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/admin/site-settings",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"site-settings"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

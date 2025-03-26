@@ -31,6 +31,7 @@ tags:
   - name: Admin > Inventory
   - name: Admin > Inventory > Unit Measurement
   - name: Admin > Products
+  - name: Admin > Site Settings
 paths:
   /api/admin/login:
     post:
@@ -459,6 +460,77 @@ paths:
           schema:
             type: string
           required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/site-settings:
+    post:
+      tags:
+        - Admin > Site Settings
+      summary: store site settings
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                website_title:
+                  type: string
+                  example: Trigau Jadibuti – Authentic Herbal Solutions
+                website_subtitle:
+                  type: string
+                  example: Natural Remedies for a Healthier Life
+                logo:
+                  type: string
+                fav_icon:
+                  type: string
+                address:
+                  type: string
+                contact_no:
+                  type: string
+                email:
+                  type: string
+                home_page_banner:
+                  type: string
+                terms_conditions:
+                  type: string
+                facebook_link:
+                  type: string
+                instagram_link:
+                  type: string
+                tiktok_link:
+                  type: string
+                whatsapp_number:
+                  type: string
+                about_us:
+                  type: string
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Admin > Site Settings
+      summary: show all site settings
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
       responses:
         '200':
           description: Successful response
