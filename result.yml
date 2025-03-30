@@ -41,6 +41,7 @@ tags:
   - name: Admin > Customers
   - name: Admin > Payment Options
   - name: Admin > Inventory Products
+  - name: Admin > Dashboard
 paths:
   /api/contact-us:
     post:
@@ -940,6 +941,24 @@ paths:
       tags:
         - Admin > Inventory Products
       summary: show all inventory products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/dashboard:
+    get:
+      tags:
+        - Admin > Dashboard
+      summary: show dashboard api
       security:
         - bearerAuth: []
       parameters:
