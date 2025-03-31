@@ -575,6 +575,172 @@
 									"response": []
 								}
 							]
+						},
+						{
+							"name": "Inventory Products",
+							"item": [
+								{
+									"name": "show all inventory products",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/api/admin/inventory-products",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"admin",
+												"inventory-products"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Inventory Adjustment",
+							"item": [
+								{
+									"name": "store inventory adjustment",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date\": \"2023-11-15\",\n    \"reason\": \"Year-end stock reconciliation\",\n    \"description\": \"Adjusting discrepancies found during annual inventory count\",\n    \"products\": [\n        {\n            \"product_id\": 1,\n            \"quantity_on_hand\": 50,\n            \"adjusted_quantity\": 45,\n            \"adjust_quantity\": -5\n        }\n      \n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/api/admin/inventory-adjustments",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"admin",
+												"inventory-adjustments"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "show all inventory adjustment list",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/api/admin/inventory-adjustments?pagination_limit=10",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"admin",
+												"inventory-adjustments"
+											],
+											"query": [
+												{
+													"key": "pagination_limit",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "show single inventory adjustment data",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/api/admin/inventory-adjustments/{id}",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"admin",
+												"inventory-adjustments",
+												"{id}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
@@ -663,7 +829,7 @@
 										{
 											"key": "product_image",
 											"type": "file",
-											"src": []
+											"src": "/Users/hanciephago/Desktop/images.png"
 										}
 									]
 								},
@@ -1592,46 +1758,6 @@
 										"api",
 										"admin",
 										"payment-options"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Inventory Products",
-					"item": [
-						{
-							"name": "show all inventory products",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/api/admin/inventory-products",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"api",
-										"admin",
-										"inventory-products"
 									]
 								}
 							},
