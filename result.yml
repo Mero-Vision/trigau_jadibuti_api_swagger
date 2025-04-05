@@ -43,6 +43,8 @@ tags:
   - name: Admin > Customers
   - name: Admin > Payment Options
   - name: Admin > Dashboard
+  - name: Admin > Analytics
+  - name: Admin > Analytics > Sales Analytics
 paths:
   /api/contact-us:
     post:
@@ -867,14 +869,14 @@ paths:
                 discount: 5
                 discount_type: fixed
                 grand_total: 105
-                tendered_amount: 105
+                tendered_amount: 10
                 change_amount: 5
                 is_credit: false
                 order_items:
                   - product_id: 1
                     quantity: 2
                     price: 50
-                  - product_id: 2
+                  - product_id: 1
                     quantity: 1
                     price: 10
       security:
@@ -921,6 +923,41 @@ paths:
             type: string
           example: application/json
         - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/orders/order-void/{order_id}:
+    post:
+      tags:
+        - Admin > Order
+      summary: void order
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                void_reason:
+                  type: string
+                  example: Mistake Order
+                _method:
+                  type: string
+                  example: PUT
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: order_id
           in: path
           schema:
             type: string
@@ -991,7 +1028,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/admin/customers/{id}:
+  /api/admin/customers/{id:
     get:
       tags:
         - Admin > Customers
@@ -1004,11 +1041,69 @@ paths:
           schema:
             type: string
           example: application/json
-        - name: id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/customers/pay-due/{customer_id}:
+    post:
+      tags:
+        - Admin > Customers
+      summary: customer due payment
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                paid_amount:
+                  type: integer
+                  example: '20'
+                payment_option_id:
+                  type: integer
+                  example: '1'
+                note:
+                  type: string
+                  example: Partial due cleared in cash
+                discount:
+                  type: string
+                discount_type:
+                  type: string
+                _method:
+                  type: string
+                  example: PUT
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: customer_id
           in: path
           schema:
             type: string
           required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/customers-total-dues:
+    get:
+      tags:
+        - Admin > Customers
+      summary: show customer total dues
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
       responses:
         '200':
           description: Successful response
@@ -1045,6 +1140,29 @@ paths:
           schema:
             type: string
           example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/admin/analytics/sales/summary:
+    get:
+      tags:
+        - Admin > Analytics > Sales Analytics
+      summary: show all sales summary
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: date
+          in: query
+          schema:
+            type: string
+          example: '2025-04-05'
       responses:
         '200':
           description: Successful response

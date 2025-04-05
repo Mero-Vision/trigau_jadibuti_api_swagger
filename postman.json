@@ -1480,7 +1480,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"user_id\": 1,\n  \"customer_id\": 1,\n  \"payment_option_id\": 1,\n  \"gross_amount\": 100.00,\n  \"tax\": 10.00,\n  \"discount\": 5.00,\n  \"discount_type\": \"fixed\",\n  \"grand_total\": 105.00,\n  \"tendered_amount\": 105.00,\n  \"change_amount\":5,\n  \"is_credit\": false,\n  \"order_items\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 2,\n      \"price\": 50.00\n    },\n    {\n      \"product_id\": 2,\n      \"quantity\": 1,\n      \"price\": 10.00\n    }\n  ]\n}",
+									"raw": "{\n  \"user_id\": 1,\n  \"customer_id\": 1,\n  \"payment_option_id\": 1,\n  \"gross_amount\": 100.00,\n  \"tax\": 10.00,\n  \"discount\": 5.00,\n  \"discount_type\": \"fixed\",\n  \"grand_total\": 105.00,\n  \"tendered_amount\": 10.00,\n  \"change_amount\":5,\n  \"is_credit\": false,\n  \"order_items\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 2,\n      \"price\": 50.00\n    },\n    {\n      \"product_id\": 1,\n      \"quantity\": 1,\n      \"price\": 10.00\n    }\n  ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1567,6 +1567,58 @@
 										"admin",
 										"orders",
 										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "void order",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "void_reason",
+											"value": "Mistake Order",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/admin/orders/order-void/{order_id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"orders",
+										"order-void",
+										"{order_id}"
 									]
 								}
 							},
@@ -1709,7 +1761,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/api/admin/customers/{id}",
+									"raw": "{{url}}/api/admin/customers/{id",
 									"host": [
 										"{{url}}"
 									],
@@ -1717,7 +1769,114 @@
 										"api",
 										"admin",
 										"customers",
-										"{id}"
+										"{id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "customer due payment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "paid_amount",
+											"value": "20",
+											"type": "text"
+										},
+										{
+											"key": "payment_option_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "note",
+											"value": "Partial due cleared in cash",
+											"type": "text"
+										},
+										{
+											"key": "discount",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "discount_type",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/admin/customers/pay-due/{customer_id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"customers",
+										"pay-due",
+										"{customer_id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show customer total dues",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/admin/customers-total-dues",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"customers-total-dues"
 									]
 								}
 							},
@@ -1802,6 +1961,59 @@
 								}
 							},
 							"response": []
+						}
+					]
+				},
+				{
+					"name": "Analytics",
+					"item": [
+						{
+							"name": "Sales Analytics",
+							"item": [
+								{
+									"name": "show all sales summary",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/api/admin/analytics/sales/summary?date=2025-04-05",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"api",
+												"admin",
+												"analytics",
+												"sales",
+												"summary"
+											],
+											"query": [
+												{
+													"key": "date",
+													"value": "2025-04-05"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				}
